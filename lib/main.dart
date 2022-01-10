@@ -25,9 +25,9 @@ class _MainPageState extends State<MainPage> {
             centerTitle: true,
             title: Text('Movie Bucket List'),
             bottom: TabBar(tabs: [
-              Tab(
-                child: Icon(Icons.trending_up_rounded),
-              ),
+              Tab(child: Text('2020 Movies')
+                  //Icon(Icons.trending_up_rounded),
+                  ),
               // Tab(
               //   child: Icon(Icons.library_add_check_outlined),
               // ),
