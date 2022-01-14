@@ -38,7 +38,6 @@ class _MainPageState extends State<MainPage> {
               Tab(
                 child: Text('Popular Movies'),
               ),
-              
             ]),
           ),
           body: TabBarView(
