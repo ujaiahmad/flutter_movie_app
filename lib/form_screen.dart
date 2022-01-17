@@ -74,17 +74,17 @@ class FormScreenState extends State<FormScreen> {
           child: Form(
             key: _formKey,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                SizedBox(height: 100),
-                _buildEmail(),
-                _buildPassword(),
-                SizedBox(height: 60),
-                buttonForForm('Register', register),
-                SizedBox(height: 30),
-                buttonForForm('Log in', logIn),
-              ],
-            ),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  SizedBox(height: 100),
+                  _buildEmail(),
+                  _buildPassword(),
+                  SizedBox(height: 60),
+                  buttonForForm('Register', register),
+                  SizedBox(height: 30),
+                  buttonForForm('Log in', logIn),
+                ],
+              ),
           ),
         ),
       ),
@@ -93,19 +93,19 @@ class FormScreenState extends State<FormScreen> {
 
   buttonForForm(nameOfButton, pressFunctionAction) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ButtonTheme(
-        minWidth: double.infinity,
-        height: 60.0,
-        child: RaisedButton(
-          child: Text(
-            nameOfButton,
-            style: TextStyle(color: Colors.white, fontSize: 25),
+          padding: const EdgeInsets.all(8.0),
+          child: ButtonTheme(
+            minWidth: double.infinity,
+            height: 60.0,
+            child: RaisedButton(
+              child: Text(
+                nameOfButton,
+                style: TextStyle(color: Colors.white, fontSize: 25),
+              ),
+              onPressed: pressFunctionAction,
+            ),
           ),
-          onPressed: pressFunctionAction,
-        ),
-      ),
-    );
+        );
   }
 
   register() {
@@ -122,13 +122,18 @@ class FormScreenState extends State<FormScreen> {
     print(_email);
     print(_password);
 
-    return SnackBar(
-      content: Text('Hey! This is a SnackBar message.'),
-      duration: Duration(seconds: 5),
-    );
-
-    //Send to API
+    // if (true) { //failed to add SnackBar
+    //   snackBarMsg(context);
+    // }
   }
+
+  // snackBarMsg(BuildContext context) { //failed to add SnackBar
+  //   final snackMassage = SnackBar(
+  //     content: Text('Hey! This is a SnackBar message.'),
+  //     duration: Duration(seconds: 5),
+  //   );
+  //   Scaffold.of(context).showSnackBar(snackMassage);
+  // }
 
   logIn() {
     if (!_formKey.currentState!.validate()) {

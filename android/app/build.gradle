@@ -63,6 +63,16 @@ flutter {
     source '../..'
 }
 
+
+android{ //added
+    defaultConfig {
+        minSdkVersion 19 
+        multiDexEnabled = true //added
+    }
+}
+
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation("androidx.multidex:multidex:2.0.1") //added
 }
+
