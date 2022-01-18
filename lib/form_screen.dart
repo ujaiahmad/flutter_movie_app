@@ -12,34 +12,36 @@ class FormScreenState extends State<FormScreen> {
   String _email = '';
   String _password = '';
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>(); // _formKey will help us get the value inside the field
 
-  Widget _buildEmail() {
+  // Text Field Widget for the email
+  Widget _buildEmail() { 
     return TextFormField(
       style: TextStyle(
         fontSize: 25.0,
         height: 2.0,
       ),
       decoration: InputDecoration(labelText: 'Email'),
-      validator: (value) {
-        if (value!.isEmpty) {
-          return 'Email is Required';
+      validator: (value) { 
+        if (value!.isEmpty) { // check if the user didn't write anything inside the field  
+          return 'Email is Required'; // error massage
         }
 
-        if (!RegExp(
+        if (!RegExp( // accept this format only : example@something.anything 
                 r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?")
             .hasMatch(value)) {
-          return 'Please enter a valid email Address';
+          return 'Please enter a valid email Address'; // error massage
         }
 
-        return null;
+        return null; // this means there is no problem 
       },
-      onSaved: (value) {
+      onSaved: (value) { // save the input email inside _email  
         _email = value!;
       },
     );
   }
 
+  // Text Field Widget for the password
   Widget _buildPassword() {
     return TextFormField(
       style: TextStyle(
@@ -49,16 +51,16 @@ class FormScreenState extends State<FormScreen> {
       decoration: InputDecoration(labelText: 'Password'),
       keyboardType: TextInputType.visiblePassword,
       validator: (value) {
-        if (value!.isEmpty) {
-          return 'Password is Required';
+        if (value!.isEmpty) { // check if the user didn't write anything inside the field 
+          return 'Password is Required';  // error massage
         }
-        if (value.length < 5) {
-          return 'Password have to be more than 5 characters';
+        if (value.length < 5) { // password have to be at least 5 characters
+          return 'Password have to be more than 5 characters';  // error massage
         }
 
-        return null;
+        return null; // this means there is no problem 
       },
-      onSaved: (value) {
+      onSaved: (value) { // save the input password inside _password  
         _password = value!;
       },
     );
@@ -73,6 +75,7 @@ class FormScreenState extends State<FormScreen> {
           margin: EdgeInsets.all(24),
           child: Form(
             key: _formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction, //show error massage without clicking on the button 
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -80,9 +83,9 @@ class FormScreenState extends State<FormScreen> {
                   _buildEmail(),
                   _buildPassword(),
                   SizedBox(height: 60),
-                  buttonForForm('Register', register),
+                  buttonForForm('Register', register), // this is a button 
                   SizedBox(height: 30),
-                  buttonForForm('Log in', logIn),
+                  buttonForForm('Log in', logIn),// this is a button
                 ],
               ),
           ),
@@ -91,6 +94,8 @@ class FormScreenState extends State<FormScreen> {
     );
   }
 
+  //this is a button Widget 
+  //it will take the name of the button and what action happens when you click on it 
   buttonForForm(nameOfButton, pressFunctionAction) {
     return Padding(
           padding: const EdgeInsets.all(8.0),
@@ -109,42 +114,36 @@ class FormScreenState extends State<FormScreen> {
   }
 
   register() {
+    // if there is a problem with one of the field (like it's empty ), the function of the button will not work
     if (!_formKey.currentState!.validate()) {
-      // if there is a problem with one of the field (like it's empty ), the function of the button will not work
       return;
     }
 
-    _formKey.currentState!
-        .save(); // to save the written values in the field inside the variables _email, _password
+    _formKey.currentState!.save(); // to save the written values in the field inside the variables _email, _password
 
     //since this is register, use variables _email and _password to send it to the database
     //this print statment just to check if the values are correct
     print(_email);
     print(_password);
 
-    // if (true) { //failed to add SnackBar
-    //   snackBarMsg(context);
-    // }
+    
   }
 
-  // snackBarMsg(BuildContext context) { //failed to add SnackBar
-  //   final snackMassage = SnackBar(
-  //     content: Text('Hey! This is a SnackBar message.'),
-  //     duration: Duration(seconds: 5),
-  //   );
-  //   Scaffold.of(context).showSnackBar(snackMassage);
-  // }
-
+  
   logIn() {
+    // if there is a problem with one of the field (like it's empty ), the function of the button will not work
     if (!_formKey.currentState!.validate()) {
       return;
     }
 
-    _formKey.currentState!.save();
+    _formKey.currentState!.save();// to save the written values in the field inside the variables _email, _password
 
+    //since this is log in, use variables _email and _password for Authentication
     print(_email);
     print(_password);
 
+    // this will navigate to the main page, it should only happens after Authentication  
+    // put this inside if statment . if Authentication true , excute the statment below
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -152,6 +151,5 @@ class FormScreenState extends State<FormScreen> {
       ),
     );
 
-    //Send to API
   }
 }
