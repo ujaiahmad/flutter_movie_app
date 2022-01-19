@@ -47,7 +47,7 @@ class Authentication extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (loginState) {
       case ApplicationLoginState.loggedOut:
-        return HomePage();
+        return Text("data"); //HomePage();
       case ApplicationLoginState.emailAddress:
         return EmailForm(
             callback: (email) => verifyEmail(
@@ -80,7 +80,7 @@ class Authentication extends StatelessWidget {
           },
         );
       case ApplicationLoginState.loggedIn:
-        return MainPage();
+        return Text("yay"); //MainPage();
     }
   }
 
