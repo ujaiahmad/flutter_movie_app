@@ -16,7 +16,7 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
   late List<MovieYear> _movieYear;
   late List<MovieDetails> _movieDetails;
   bool _isLoading = true;
-  //late List<bool> boolList
+  List<bool> boolList = [];
   List foo = [];
 
   @override
@@ -35,6 +35,7 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
       //  _movieDetails
       //     .add(await MovieDetailsApi.getDetails(_movieYear[i].movie_id));
       foo.add(_movieDetails);
+      boolList.add(false);
     }
     // print(_movieYear);
     // print(foo);
@@ -85,7 +86,7 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
                           //Text(_movieYear[index].movie_title),
                           Text(
                             foo[index][0].movieTitle.toString(),
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 23, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
@@ -106,8 +107,15 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
                           IconButton(
                               onPressed: () {
                                 //changeisPressed(_isPressed);
+                                setState(() {
+                                  if (boolList[index] == false) {
+                                    boolList[index] = true;
+                                  } else {
+                                    boolList[index] = false;
+                                  }
+                                });
                               },
-                              icon: Icon(_isPressed
+                              icon: Icon(boolList[index]
                                   ? Icons.favorite
                                   : Icons.favorite_border_outlined)),
                           // //Text(foo[index][0].img.toString()),
