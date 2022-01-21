@@ -12,7 +12,8 @@ class MoviePopularityCustomCard extends StatefulWidget {
       _MoviePopularityCustomCardState();
 }
 
-class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard> {
+class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard>
+    with AutomaticKeepAliveClientMixin<MoviePopularityCustomCard> {
   late List<MoviePopularity> _moviePopularity;
   late List<MovieDetails> _movieDetails;
   bool _isLoading = true;
@@ -24,6 +25,9 @@ class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard> {
     super.initState();
     getMovieYear();
   }
+
+  @override
+  bool get wantKeepAlive => true;
 
   Future<void> getMovieYear() async {
     _moviePopularity = await MoviePopularityApi.geturl();
