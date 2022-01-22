@@ -18,68 +18,49 @@ class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard>
   late List<MovieDetails> _movieDetails;
   bool _isLoading = true;
   List<bool> boolList = [];
-  List foo = [];
+  List movieDetailsList = [];
 
   @override
   void initState() {
     super.initState();
-    getMovieYear();
+    getMoviePopularity();
   }
 
   @override
   bool get wantKeepAlive => true;
 
-  Future<void> getMovieYear() async {
+  Future<void> getMoviePopularity() async {
     _moviePopularity = await MoviePopularityApi.geturl();
     for (var i = 0; i < _moviePopularity.length; i++) {
       _movieDetails =
           await MovieDetailsApi.getDetails(_moviePopularity[i].movie_id);
       //  _movieDetails
       //     .add(await MovieDetailsApi.getDetails(_movieYear[i].movie_id));
-      foo.add(_movieDetails);
+      movieDetailsList.add(_movieDetails);
       boolList.add(false);
     }
     // print(_moviePopularity);
-    // print(foo);
+    // print(movieDetailsList);
     setState(() {
       _isLoading = false;
     });
   }
 
-  // changeisPressed(_isPressed) {
-  //   setState(() {
-  //     if (_isPressed == false) {
-  //       _isPressed = true;
-  //     } else {
-  //       _isPressed = false;
-  //     }
-  //   });
-  // }
-
-  // Future<void> getMovieDetails() async {
-  //   //= await MovieDetailsApi.getDetails(_movieYear[index].movie_id);
-  //   for (var i = 0; i < _movieYear.length; i++) {
-  //     _movieDetails = await MovieDetailsApi.getDetails(_movieYear[i].movie_id);
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return _isLoading
-        ? Center(
+        ? const Center(
             child: CircularProgressIndicator(),
           )
         : ListView.builder(
             itemCount: _moviePopularity.length,
             itemBuilder: (context, index) {
-              bool _isPressed = true;
-              // var customText =
-              //     'Title: ${foo[index][0].movieTitle.toString()}\nYear: ${foo[index][0].year.toString()}\nRating: ${foo[index][0].rating.toString()}\nContent: ${foo[index][0].pgRating.toString()}';
               return Card(
                 child: Row(
                   children: [
                     Image(
-                      image: NetworkImage(foo[index][0].img.toString()),
+                      image: NetworkImage(
+                          movieDetailsList[index][0].img.toString()),
                     ),
                     Expanded(
                       child: Column(
@@ -87,16 +68,21 @@ class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard>
                           //Text(_movieYear[index].movie_id),
                           //Text(_moviePopularity[index].movie_id),
                           Text(
-                            foo[index][0].movieTitle.toString(),
-                            style: TextStyle(
+                            movieDetailsList[index][0].movieTitle.toString(),
+                            style: const TextStyle(
                                 fontSize: 23, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
-                          Text('Genre: ' + foo[index][0].genre.toString()),
-                          Text('Rating: ' + foo[index][0].rating.toString()),
-                          Text('Content: ' + foo[index][0].pgRating.toString()),
+                          Text('Genre: ' +
+                              movieDetailsList[index][0].genre.toString()),
+                          Text('Rating: ' +
+                              movieDetailsList[index][0].rating.toString()),
+                          Text('Content: ' +
+                              movieDetailsList[index][0].pgRating.toString()),
                           Text('Length: ' +
-                              foo[index][0].movieLength.toString()),
+                              movieDetailsList[index][0]
+                                  .movieLength
+                                  .toString()),
                           // Container(
                           //   alignment: Alignment.center,
                           //   child: Text(
@@ -120,7 +106,7 @@ class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard>
                               icon: Icon(boolList[index]
                                   ? Icons.favorite
                                   : Icons.favorite_border_outlined)),
-                          // //Text(foo[index][0].img.toString()),
+                          // //Text(movieDetailsList[index][0].img.toString()),
                         ],
                       ),
                     ),
