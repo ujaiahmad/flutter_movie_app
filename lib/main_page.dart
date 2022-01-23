@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app/movie%20by%20popularity/movie_popularity_widget.dart';
 import 'package:flutter_movie_app/movie%20by%20year/movie_year_widget.dart';
@@ -24,20 +26,16 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   List movieBucket = [];
-  //List isChecked = [];
   addMovieIntobucket(movie, boolList) {
     movieBucket.add([movie, !boolList]);
-    //isChecked.add(false);
-    print(movieBucket);
+
+    //print(movieBucket);
   }
 
-  removeMovieFromBucket(movie, boolList) {
-    // List temp = [movie, !boolList];
-    // bool uhh = movieBucket.remove(temp);
-    movieBucket.removeWhere((element) => element == [movie, !boolList]);
-
-    print(movieBucket);
-    //print(uhh);
+  removeMovieFromBucket(movie) {
+    movieBucket
+        .removeAt(movieBucket.indexWhere((element) => element[0] == movie));
+    //print(movieBucket);
   }
 
   @override

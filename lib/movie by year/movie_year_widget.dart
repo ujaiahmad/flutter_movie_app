@@ -111,8 +111,7 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
                                     widget.removeMovieFromBucket(
                                         movieDetailsList[index][0]
                                             .movieTitle
-                                            .toString(),
-                                        boolList[index]);
+                                            .toString());
                                   }
                                 });
                               },
