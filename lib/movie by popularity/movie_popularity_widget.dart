@@ -5,7 +5,11 @@ import 'movie_popularity.dart';
 import 'movie_popularity_api.dart';
 
 class MoviePopularityCustomCard extends StatefulWidget {
-  MoviePopularityCustomCard({Key? key}) : super(key: key);
+  MoviePopularityCustomCard(
+      this.movieBucket, this.addMovieIntobucket, this.removeMovieFromBucket);
+  List movieBucket;
+  Function addMovieIntobucket;
+  Function removeMovieFromBucket;
 
   @override
   _MoviePopularityCustomCardState createState() =>
@@ -98,8 +102,18 @@ class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard>
                                 setState(() {
                                   if (boolList[index] == false) {
                                     boolList[index] = true;
+
+                                    widget.addMovieIntobucket(
+                                        movieDetailsList[index][0]
+                                            .movieTitle
+                                            .toString(),
+                                        boolList[index]);
                                   } else {
                                     boolList[index] = false;
+                                    widget.removeMovieFromBucket(
+                                        movieDetailsList[index][0]
+                                            .movieTitle
+                                            .toString());
                                   }
                                 });
                               },

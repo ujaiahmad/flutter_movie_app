@@ -5,7 +5,12 @@ import 'movie_year.dart';
 import 'movie_year_api.dart';
 
 class MovieYearCustomCard extends StatefulWidget {
-  //MovieYearCustomCard({Key? key}) : super(key: key);
+  MovieYearCustomCard(
+      this.movieBucket, this.addMovieIntobucket, this.removeMovieFromBucket);
+  //List movieBucket;
+  List movieBucket;
+  Function addMovieIntobucket;
+  Function removeMovieFromBucket;
 
   @override
   _MovieYearCustomCardState createState() => _MovieYearCustomCardState();
@@ -96,8 +101,18 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
                                 setState(() {
                                   if (boolList[index] == false) {
                                     boolList[index] = true;
+                                    widget.addMovieIntobucket(
+                                        movieDetailsList[index][0]
+                                            .movieTitle
+                                            .toString(),
+                                        boolList[index]);
                                   } else {
                                     boolList[index] = false;
+                                    widget.removeMovieFromBucket(
+                                        movieDetailsList[index][0]
+                                            .movieTitle
+                                            .toString(),
+                                        boolList[index]);
                                   }
                                 });
                               },

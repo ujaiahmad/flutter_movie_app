@@ -23,6 +23,23 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  List movieBucket = [];
+  //List isChecked = [];
+  addMovieIntobucket(movie, boolList) {
+    movieBucket.add([movie, !boolList]);
+    //isChecked.add(false);
+    print(movieBucket);
+  }
+
+  removeMovieFromBucket(movie, boolList) {
+    // List temp = [movie, !boolList];
+    // bool uhh = movieBucket.remove(temp);
+    movieBucket.removeWhere((element) => element == [movie, !boolList]);
+
+    print(movieBucket);
+    //print(uhh);
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -31,7 +48,7 @@ class _MainPageState extends State<MainPage> {
           appBar: AppBar(
             backgroundColor: Colors.purple[600],
             centerTitle: true,
-            title: Text('Movie Bucket List'),
+            title: const Text('Movie Bucket List'),
             bottom: const TabBar(tabs: [
               Tab(child: Text('2020 Movies')
                   //Icon(Icons.trending_up_rounded),
@@ -40,15 +57,17 @@ class _MainPageState extends State<MainPage> {
                 child: Text('Popular Movies'),
               ),
               Tab(
-                child: Text('Movie Bucket List'),
+                child: Text('My Bucket List'),
               )
             ]),
           ),
           body: TabBarView(
             children: [
-              MovieYearCustomCard(),
-              MoviePopularityCustomCard(),
-              MovieBucketListWidget()
+              MovieYearCustomCard(
+                  movieBucket, addMovieIntobucket, removeMovieFromBucket),
+              MoviePopularityCustomCard(
+                  movieBucket, addMovieIntobucket, removeMovieFromBucket),
+              MovieBucketListWidget(movieBucket)
             ],
           ),
         ));
