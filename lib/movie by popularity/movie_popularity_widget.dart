@@ -5,110 +5,112 @@ import 'movie_popularity.dart';
 import 'movie_popularity_api.dart';
 
 class MoviePopularityCustomCard extends StatefulWidget {
-  MoviePopularityCustomCard({Key? key}) : super(key: key);
+  //get all passed variables
+  MoviePopularityCustomCard(
+      this.movieBucket, this.addMovieIntobucket, this.removeMovieFromBucket);
+  List movieBucket;
+  Function addMovieIntobucket;
+  Function removeMovieFromBucket;
 
   @override
   _MoviePopularityCustomCardState createState() =>
       _MoviePopularityCustomCardState();
 }
 
-class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard> {
+class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard>
+    with AutomaticKeepAliveClientMixin<MoviePopularityCustomCard> {
+  //preserve state of tab
+
+  //initialisation
   late List<MoviePopularity> _moviePopularity;
   late List<MovieDetails> _movieDetails;
   bool _isLoading = true;
-  //late List<bool> boolList
-  List foo = [];
+  List<bool> boolList = [];
+  List movieDetailsList = [];
 
   @override
   void initState() {
     super.initState();
-    getMovieYear();
+    getMoviePopularity();
   }
 
-  Future<void> getMovieYear() async {
-    _moviePopularity = await MoviePopularityApi.geturl();
+  @override
+  bool get wantKeepAlive => true;
+
+  Future<void> getMoviePopularity() async {
+    _moviePopularity = await MoviePopularityApi.geturl(); //get popular movie id
     for (var i = 0; i < _moviePopularity.length; i++) {
-      _movieDetails =
-          await MovieDetailsApi.getDetails(_moviePopularity[i].movie_id);
-      //  _movieDetails
-      //     .add(await MovieDetailsApi.getDetails(_movieYear[i].movie_id));
-      foo.add(_movieDetails);
+      _movieDetails = await MovieDetailsApi.getDetails(
+          _moviePopularity[i].movie_id); //get details based on id
+
+      movieDetailsList.add(_movieDetails); // add into list
+      boolList.add(false); //add boolList
     }
-    // print(_moviePopularity);
-    // print(foo);
+
     setState(() {
       _isLoading = false;
     });
   }
 
-  // changeisPressed(_isPressed) {
-  //   setState(() {
-  //     if (_isPressed == false) {
-  //       _isPressed = true;
-  //     } else {
-  //       _isPressed = false;
-  //     }
-  //   });
-  // }
-
-  // Future<void> getMovieDetails() async {
-  //   //= await MovieDetailsApi.getDetails(_movieYear[index].movie_id);
-  //   for (var i = 0; i < _movieYear.length; i++) {
-  //     _movieDetails = await MovieDetailsApi.getDetails(_movieYear[i].movie_id);
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
     return _isLoading
-        ? Center(
-            child: CircularProgressIndicator(),
+        ? const Center(
+            child: CircularProgressIndicator(), //display laoding animation
           )
         : ListView.builder(
             itemCount: _moviePopularity.length,
             itemBuilder: (context, index) {
-              bool _isPressed = true;
-              // var customText =
-              //     'Title: ${foo[index][0].movieTitle.toString()}\nYear: ${foo[index][0].year.toString()}\nRating: ${foo[index][0].rating.toString()}\nContent: ${foo[index][0].pgRating.toString()}';
               return Card(
                 child: Row(
                   children: [
                     Image(
-                      image: NetworkImage(foo[index][0].img.toString()),
+                      image: NetworkImage(
+                          movieDetailsList[index][0].img.toString()),
                     ),
                     Expanded(
                       child: Column(
                         children: [
-                          //Text(_movieYear[index].movie_id),
-                          //Text(_moviePopularity[index].movie_id),
                           Text(
-                            foo[index][0].movieTitle.toString(),
-                            style: TextStyle(
+                            movieDetailsList[index][0].movieTitle.toString(),
+                            style: const TextStyle(
                                 fontSize: 23, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
-                          Text('Genre: ' + foo[index][0].genre.toString()),
-                          Text('Rating: ' + foo[index][0].rating.toString()),
-                          Text('Content: ' + foo[index][0].pgRating.toString()),
+                          Text('Genre: ' +
+                              movieDetailsList[index][0].genre.toString()),
+                          Text('Rating: ' +
+                              movieDetailsList[index][0].rating.toString()),
+                          Text('Content: ' +
+                              movieDetailsList[index][0].pgRating.toString()),
                           Text('Length: ' +
-                              foo[index][0].movieLength.toString()),
-                          // Container(
-                          //   alignment: Alignment.center,
-                          //   child: Text(
-                          //     customText,
-                          //     //overflow: TextOverflow.ellipsis,
-                          //     style: TextStyle(fontFamily: 'Arial'),
-                          //   ),
-                          //   padding: EdgeInsets.all(10),
-                          // ),
+                              movieDetailsList[index][0]
+                                  .movieLength
+                                  .toString()),
                           IconButton(
                               onPressed: () {
-                                //changeisPressed(_isPressed);
+                                setState(() {
+                                  if (boolList[index] == false) {
+                                    boolList[index] = true;
+
+                                    widget.addMovieIntobucket(
+                                        movieDetailsList[index][0]
+                                            .movieTitle
+                                            .toString(),
+                                        boolList[index]); //add to bucket list
+                                  } else {
+                                    boolList[index] = false;
+                                    widget.removeMovieFromBucket(movieDetailsList[
+                                            index][0]
+                                        .movieTitle
+                                        .toString()); //remove from bucket list
+                                  }
+                                });
                               },
-                              icon: Icon(_isPressed
+                              icon: Icon(boolList[index] //display fav icon
                                   ? Icons.favorite
                                   : Icons.favorite_border_outlined)),
-                          // //Text(foo[index][0].img.toString()),
+                          // //Text(movieDetailsList[index][0].img.toString()),
                         ],
                       ),
                     ),

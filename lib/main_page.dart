@@ -1,6 +1,9 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app/movie%20by%20popularity/movie_popularity_widget.dart';
 import 'package:flutter_movie_app/movie%20by%20year/movie_year_widget.dart';
+import 'movie bucket list/movie_bucket_list.dart';
 // import 'package:firebase_auth/firebase_auth.dart'; // new
 // import 'package:firebase_core/firebase_core.dart'; // new
 // import 'package:provider/provider.dart'; // new
@@ -22,26 +25,50 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  List movieBucket =
+      []; //store the liked movie name and the boolList(true/false)
+
+  //function add movie title + boollist into the bucket list
+  addMovieIntobucket(movie, boolList) {
+    movieBucket.add([movie, !boolList]);
+
+    //print(movieBucket); //for debugging
+  }
+
+  removeMovieFromBucket(movie) {
+    //get the index of the unliked movie
+    movieBucket
+        .removeAt(movieBucket.indexWhere((element) => element[0] == movie));
+    //print(movieBucket); //for debuggin
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 2,
+        length: 3,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.purple[600],
             centerTitle: true,
-            title: Text('Movie Bucket List'),
-            bottom: TabBar(tabs: [
-              Tab(child: Text('2020 Movies')
-                  //Icon(Icons.trending_up_rounded),
-                  ),
+            title: const Text('Movie Bucket List'),
+            bottom: const TabBar(tabs: [
+              Tab(child: Text('2020 Movies')),
               Tab(
                 child: Text('Popular Movies'),
               ),
+              Tab(
+                child: Text('My Bucket List'),
+              )
             ]),
           ),
           body: TabBarView(
-            children: [MovieYearCustomCard(), MoviePopularityCustomCard()],
+            children: [
+              MovieYearCustomCard(
+                  movieBucket, addMovieIntobucket, removeMovieFromBucket),
+              MoviePopularityCustomCard(
+                  movieBucket, addMovieIntobucket, removeMovieFromBucket),
+              MovieBucketListWidget(movieBucket)
+            ],
           ),
         ));
   }
