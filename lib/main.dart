@@ -13,7 +13,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: MainPage(),
+      home:
+          MainPage(), //you guys can change this... i merged movie api and forgot to replace this, but the code should work fine
     );
   }
 }
