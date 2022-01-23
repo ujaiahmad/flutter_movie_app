@@ -5,6 +5,7 @@ import 'movie_popularity.dart';
 import 'movie_popularity_api.dart';
 
 class MoviePopularityCustomCard extends StatefulWidget {
+  //get all passed variables
   MoviePopularityCustomCard(
       this.movieBucket, this.addMovieIntobucket, this.removeMovieFromBucket);
   List movieBucket;
@@ -18,6 +19,9 @@ class MoviePopularityCustomCard extends StatefulWidget {
 
 class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard>
     with AutomaticKeepAliveClientMixin<MoviePopularityCustomCard> {
+  //preserve state of tab
+
+  //initialisation
   late List<MoviePopularity> _moviePopularity;
   late List<MovieDetails> _movieDetails;
   bool _isLoading = true;
@@ -34,17 +38,15 @@ class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard>
   bool get wantKeepAlive => true;
 
   Future<void> getMoviePopularity() async {
-    _moviePopularity = await MoviePopularityApi.geturl();
+    _moviePopularity = await MoviePopularityApi.geturl(); //get popular movie id
     for (var i = 0; i < _moviePopularity.length; i++) {
-      _movieDetails =
-          await MovieDetailsApi.getDetails(_moviePopularity[i].movie_id);
-      //  _movieDetails
-      //     .add(await MovieDetailsApi.getDetails(_movieYear[i].movie_id));
-      movieDetailsList.add(_movieDetails);
-      boolList.add(false);
+      _movieDetails = await MovieDetailsApi.getDetails(
+          _moviePopularity[i].movie_id); //get details based on id
+
+      movieDetailsList.add(_movieDetails); // add into list
+      boolList.add(false); //add boolList
     }
-    // print(_moviePopularity);
-    // print(movieDetailsList);
+
     setState(() {
       _isLoading = false;
     });
@@ -54,7 +56,7 @@ class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard>
   Widget build(BuildContext context) {
     return _isLoading
         ? const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(), //display laoding animation
           )
         : ListView.builder(
             itemCount: _moviePopularity.length,
@@ -69,8 +71,6 @@ class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard>
                     Expanded(
                       child: Column(
                         children: [
-                          //Text(_movieYear[index].movie_id),
-                          //Text(_moviePopularity[index].movie_id),
                           Text(
                             movieDetailsList[index][0].movieTitle.toString(),
                             style: const TextStyle(
@@ -87,18 +87,8 @@ class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard>
                               movieDetailsList[index][0]
                                   .movieLength
                                   .toString()),
-                          // Container(
-                          //   alignment: Alignment.center,
-                          //   child: Text(
-                          //     customText,
-                          //     //overflow: TextOverflow.ellipsis,
-                          //     style: TextStyle(fontFamily: 'Arial'),
-                          //   ),
-                          //   padding: EdgeInsets.all(10),
-                          // ),
                           IconButton(
                               onPressed: () {
-                                //changeisPressed(_isPressed);
                                 setState(() {
                                   if (boolList[index] == false) {
                                     boolList[index] = true;
@@ -107,17 +97,17 @@ class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard>
                                         movieDetailsList[index][0]
                                             .movieTitle
                                             .toString(),
-                                        boolList[index]);
+                                        boolList[index]); //add to bucket list
                                   } else {
                                     boolList[index] = false;
-                                    widget.removeMovieFromBucket(
-                                        movieDetailsList[index][0]
-                                            .movieTitle
-                                            .toString());
+                                    widget.removeMovieFromBucket(movieDetailsList[
+                                            index][0]
+                                        .movieTitle
+                                        .toString()); //remove from bucket list
                                   }
                                 });
                               },
-                              icon: Icon(boolList[index]
+                              icon: Icon(boolList[index] //display fav icon
                                   ? Icons.favorite
                                   : Icons.favorite_border_outlined)),
                           // //Text(movieDetailsList[index][0].img.toString()),

@@ -25,17 +25,21 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  List movieBucket = [];
+  List movieBucket =
+      []; //store the liked movie name and the boolList(true/false)
+
+  //function add movie title + boollist into the bucket list
   addMovieIntobucket(movie, boolList) {
     movieBucket.add([movie, !boolList]);
 
-    //print(movieBucket);
+    //print(movieBucket); //for debugging
   }
 
   removeMovieFromBucket(movie) {
+    //get the index of the unliked movie
     movieBucket
         .removeAt(movieBucket.indexWhere((element) => element[0] == movie));
-    //print(movieBucket);
+    //print(movieBucket); //for debuggin
   }
 
   @override
@@ -48,9 +52,7 @@ class _MainPageState extends State<MainPage> {
             centerTitle: true,
             title: const Text('Movie Bucket List'),
             bottom: const TabBar(tabs: [
-              Tab(child: Text('2020 Movies')
-                  //Icon(Icons.trending_up_rounded),
-                  ),
+              Tab(child: Text('2020 Movies')),
               Tab(
                 child: Text('Popular Movies'),
               ),

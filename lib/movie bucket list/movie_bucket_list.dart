@@ -9,24 +9,6 @@ class MovieBucketListWidget extends StatefulWidget {
 }
 
 class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
-  // List isChecked = [];
-  // addBoolValue() {
-  //   for (var i = 0; i < widget.movieBucket.length; i++) {
-  //     isChecked.add(false);
-  //   }
-  // }
-
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   //addBoolValue();
-  //   print(widget.movieBucket);
-  // }
-
-  // @override
-  // bool get wantKeepAlive => true;
-
   @override
   Widget build(BuildContext context) {
     if (widget.movieBucket.isEmpty) {
@@ -48,27 +30,22 @@ class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
                     value: widget.movieBucket[index][1],
                     onChanged: (bool? value) {
                       setState(() {
-                        widget.movieBucket[index][1] = value!;
-                        // print('This is the ' +
-                        //     index.toString() +
-                        //     ' isChecked: ' +
-                        //     isChecked[index].toString());
-                        //print(widget.movieBucket[index][1]);
+                        widget.movieBucket[index][1] =
+                            value!; //change tick value to the inverse
                       });
-                      // print('Movie is ' + widget.movieBucket[index].toString());
                     },
                   ),
                   Padding(
                     padding: const EdgeInsets.all(10),
                     child: Text(widget.movieBucket[index][0].toString(),
-                        style: widget.movieBucket[index][1]
+                        style: widget.movieBucket[index]
+                                [1] //change decoration based on boolList
                             ? const TextStyle(
                                 decoration: TextDecoration.lineThrough,
                                 decorationThickness: 2)
                             : const TextStyle(decoration: TextDecoration.none)),
                   ),
                   IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
-                  //isChecked[index] ? Text('Completed') : Text('Hehe'),
                 ],
               ),
             );
