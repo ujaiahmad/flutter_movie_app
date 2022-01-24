@@ -36,7 +36,7 @@ class _MainPageState extends State<MainPage> {
   }
 
   removeMovieFromBucket(movie) {
-    //get the index of the unliked movie
+    //get the index of the unliked movie and remove ti
     movieBucket
         .removeAt(movieBucket.indexWhere((element) => element[0] == movie));
     //print(movieBucket); //for debuggin
