@@ -1,13 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_movie_app/main_page.dart';
+import 'package:flutterfire_ui/auth.dart';
 
-class Authentication {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+class Auth extends StatelessWidget {
+  const Auth({Key? key}) : super(key: key);
 
-  Future register() async{
-    try{
-      UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password)
-    }catch(e){
-
-    }
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) {
+          return SignInScreen(providerConfigs: [
+            EmailProviderConfiguration(),
+          ]);
+        }
+        return MainPage();
+      },
+    );
   }
 }
