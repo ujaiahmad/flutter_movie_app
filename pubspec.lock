@@ -154,7 +154,7 @@ packages:
       name: firebase_database_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0+4"
+    version: "0.2.0+5"
   firebase_database_web:
     dependency: transitive
     description:
@@ -175,7 +175,7 @@ packages:
       name: firebase_dynamic_links_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0+4"
+    version: "0.2.0+5"
   flutter:
     dependency: "direct main"
     description: flutter
