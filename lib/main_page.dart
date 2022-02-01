@@ -1,5 +1,6 @@
 //import 'dart:ffi';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_movie_app/movie%20by%20popularity/movie_popularity_widget.dart';
 import 'package:flutter_movie_app/movie%20by%20year/movie_year_widget.dart';
@@ -12,14 +13,16 @@ import 'movie bucket list/movie_bucket_list.dart';
 // import 'src/authentication.dart'; // new
 //import 'src/widgets.dart';
 
-void main() {
-  runApp(MaterialApp(
-    home: MainPage(),
-  ));
-}
+// void main() {
+//   runApp(MaterialApp(
+//     home: MainPage(),
+//   ));
+// }
 
 class MainPage extends StatefulWidget {
-  MainPage({Key? key}) : super(key: key);
+  MainPage({Key? key, required this.user}) : super(key: key);
+
+  final User? user;
 
   @override
   _MainPageState createState() => _MainPageState();
@@ -45,6 +48,9 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+      print(widget.user!); // this give all , need to send it to other 2 page
+     print(widget.user!.email); // this give email of thee user
+     print(widget.user!.uid); // this give user id
     return DefaultTabController(
         length: 3,
         child: Scaffold(

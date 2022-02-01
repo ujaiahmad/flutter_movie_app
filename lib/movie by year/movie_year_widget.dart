@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutterfire_ui/auth.dart';
 import 'package:flutter/material.dart';
 import 'movie_details.dart';
 import 'movie_details_api.dart';
@@ -24,6 +26,7 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
   bool _isLoading = true;
   List<bool> boolList = [];
   List movieDetailsList = [];
+  List movieIDlsList = [];
 
   @override
   void initState() {
@@ -40,7 +43,9 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
       _movieDetails =
           await MovieDetailsApi.getDetails(//get movie details based on id
               _movieYear[i].movie_id); //pass the id of the 2020 movies
-
+      //print(_movieDetails);
+      //print(_movieYear[i].movie_id); // movie id
+      movieIDlsList.add(_movieYear[i].movie_id);
       movieDetailsList.add(_movieDetails); //add the movie
       boolList.add(false); //the boolList to false
     }
@@ -50,8 +55,10 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
     });
   }
 
+  //late final User? user ;
   @override
   Widget build(BuildContext context) {
+      // print(user);
     return _isLoading
         ? const Center(
             child: CircularProgressIndicator(), //display loading animation
@@ -75,6 +82,7 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
                                 fontSize: 23, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
+                          Text('ID: ' + movieIDlsList[index]), //checking the id
                           Text('Genre: ' +
                               movieDetailsList[index][0].genre.toString()),
                           Text('Rating: ' +

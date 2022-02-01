@@ -16,7 +16,7 @@ class Auth extends StatelessWidget {
             EmailProviderConfiguration(),
           ]);
         }
-        return MainPage();
+        return MainPage(user: snapshot.data);
       },
     );
   }
