@@ -27,17 +27,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-Scaffold test() {
-  return Scaffold(
-    backgroundColor: Colors.purple,
-    appBar: AppBar(
-      title: Text('Movie App'),
-      backgroundColor:Colors.purple ,
-      actions: [
-        SignOutButton()
-       ],
-      ),
-      body: Auth(), 
-  );
-}
