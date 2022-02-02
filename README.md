@@ -32,7 +32,7 @@
 
 # Instructions
 
-1. Clone the repo
+1. Clone the repository 
 ```
 $ git clone https://github.com/ujaiahmad/flutter_movie_app.git
 ```
