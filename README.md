@@ -3,10 +3,9 @@
 Group Project Mad
 
 **Group members:**
-1.
-2.
-3.
-4.
+| Name          | Matric No.    | 
+|:--------------|:-------------:|
+|               |               |
 
 **Project Summary:**
 
@@ -18,6 +17,6 @@ Group Project Mad
 
 **Screen Details**
 
-| Screen | Functionality | 
+| Screen        | Functionality | 
 |:--------------|:-------------:|
-|  |  |
+|               |               |
