@@ -17,6 +17,7 @@ dependencies:
   get: ^4.6.1
   flutterfire_ui: ^0.3.1
   firebase_database_web: ^0.2.0+5
+  cloud_firestore: ^3.1.7
 
 dev_dependencies:
   flutter_test:

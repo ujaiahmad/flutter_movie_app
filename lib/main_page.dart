@@ -7,6 +7,7 @@ import 'package:flutter_movie_app/movie%20by%20year/movie_year_widget.dart';
 import 'package:flutterfire_ui/auth.dart';
 
 import 'movie bucket list/movie_bucket_list.dart';
+import 'movie_bucket_list/movie_bucket_list.dart';
 // import 'package:firebase_auth/firebase_auth.dart'; // new
 // import 'package:firebase_core/firebase_core.dart'; // new
 // import 'package:provider/provider.dart'; // new
@@ -23,7 +24,7 @@ import 'movie bucket list/movie_bucket_list.dart';
 class MainPage extends StatefulWidget {
   MainPage({Key? key, required this.user}) : super(key: key);
 
-  final User? user;
+  final User? user;  // getting user informations
 
   @override
   _MainPageState createState() => _MainPageState();
