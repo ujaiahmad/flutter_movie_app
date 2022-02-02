@@ -24,7 +24,7 @@ import 'movie_bucket_list/movie_bucket_list.dart';
 class MainPage extends StatefulWidget {
   MainPage({Key? key, required this.user}) : super(key: key);
 
-  final User? user;  // getting user informations
+  final User? user; // getting user informations
 
   @override
   _MainPageState createState() => _MainPageState();
@@ -48,20 +48,23 @@ class _MainPageState extends State<MainPage> {
     //print(movieBucket); //for debuggin
   }
 
+  User? currenUser = FirebaseAuth.instance.currentUser; //get current user information
+
   @override
   Widget build(BuildContext context) {
-      print(widget.user!); // this give all , need to send it to other 2
-     print(widget.user!.email); // this give email of thee user
-     print(widget.user!.uid); // this give user id
+    // print(widget.user!); // this give all , need to send it to other 2
+    // print(widget.user!.email); // this give email of thee user
+    // print(widget.user!.uid); // this give user id
+    print(currenUser); // this give all , need to send it to other 2
+    print(currenUser!.email); // this give email of thee user
+    print(currenUser!.uid); // this give user id
     return DefaultTabController(
         length: 3,
         child: Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.purple[600],
             title: const Text('Movie App'),
-            actions: [
-                  SignOutButton()
-                      ],
+            actions: [SignOutButton()],
             bottom: const TabBar(tabs: [
               Tab(child: Text('2020 Movies')),
               Tab(
