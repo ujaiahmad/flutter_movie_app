@@ -23,11 +23,11 @@ class SendToFirebase {
 
   //print(FirebaseAuth.instance.currentUser!.uid);
   addToFirebase() async {
-    favMovieRef.doc(moveiID).set({
+    await favMovieRef.doc(moveiID).set({
       "img":moveiImg,
       "genre":moveiGenre,
       "rating":moveiRating,
-      "comtent":moveiContent,
+      "content":moveiContent,
       "length":moveiLength
     });
   }

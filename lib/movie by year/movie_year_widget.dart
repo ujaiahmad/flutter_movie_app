@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_movie_app/movie_bucket_list/send_to_firebase.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'package:flutter/material.dart';
 import 'movie_details.dart';
@@ -95,23 +96,29 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
                                   .toString()),
                           IconButton(
                               onPressed: () {
-                                setState(() {
-                                  if (boolList[index] == false) {
-                                    boolList[index] = true;
-                                    widget.addMovieIntobucket(
-                                        movieDetailsList[index][0]
-                                            .movieTitle
-                                            .toString(),
-                                        boolList[
-                                            index]); //add liked movie into bucket list
-                                  } else {
-                                    boolList[index] = false;
-                                    widget.removeMovieFromBucket(movieDetailsList[
-                                            index][0]
-                                        .movieTitle
-                                        .toString()); //removed like movie from bucket
-                                  }
-                                });
+                                SendToFirebase(
+                                  movieIDlsList[index],
+                                  movieDetailsList[index][0].movieTitle.toString(),
+                                  movieDetailsList[index][0].genre.toString(),
+                                  movieDetailsList[index][0].rating.toString(),
+                                  movieDetailsList[index][0].pgRating.toString(),
+                                  movieDetailsList[index][0].movieLength.toString()
+                                  ).addToFirebase();
+
+                                  // var sendOrDelete= SendToFirebase(
+                                  // movieIDlsList[index],
+                                  // movieDetailsList[index][0].movieTitle.toString(),
+                                  // movieDetailsList[index][0].genre.toString(),
+                                  // movieDetailsList[index][0].rating.toString(),
+                                  // movieDetailsList[index][0].pgRating.toString(),
+                                  // movieDetailsList[index][0].movieLength.toString()
+                                  // );
+                                  // if (movei id inside database){
+                                  //   sendOrDelete.deleteFromFirebase()
+
+                                  // }else {
+                                  //   sendOrDelete.addToFirebase()
+                                  // }
                               },
                               icon: Icon(boolList[index] //display fav button
                                   ? Icons.favorite

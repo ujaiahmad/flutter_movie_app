@@ -22,9 +22,9 @@ import 'movie_bucket_list/movie_bucket_list.dart';
 // }
 
 class MainPage extends StatefulWidget {
-  MainPage({Key? key, required this.user}) : super(key: key);
+  MainPage({Key? key}) : super(key: key);
 
-  final User? user; // getting user informations
+ 
 
   @override
   _MainPageState createState() => _MainPageState();
@@ -75,7 +75,7 @@ class _MainPageState extends State<MainPage> {
               )
             ]),
           ),
-          body: TabBarView(
+          body: TabBarView (
             children: [
               MovieYearCustomCard(
                   movieBucket, addMovieIntobucket, removeMovieFromBucket),
