@@ -97,8 +97,9 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
                           IconButton(
                               onPressed: () {
                                 SendToFirebase(
-                                  movieIDlsList[index],
+                                  movieIDlsList[index], // movei id
                                   movieDetailsList[index][0].movieTitle.toString(),
+                                  movieDetailsList[index][0].img.toString(),
                                   movieDetailsList[index][0].genre.toString(),
                                   movieDetailsList[index][0].rating.toString(),
                                   movieDetailsList[index][0].pgRating.toString(),

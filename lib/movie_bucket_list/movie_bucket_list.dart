@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MovieBucketListWidget extends StatefulWidget {
@@ -9,8 +11,23 @@ class MovieBucketListWidget extends StatefulWidget {
 }
 
 class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
+  CollectionReference favMovieRef = FirebaseFirestore.instance
+      .collection('favorite')
+      .doc(FirebaseAuth.instance.currentUser!.uid)
+      .collection('myList');
+
+  getData() async {
+    var responseBody = await favMovieRef.get();
+    responseBody.docs.forEach((element) {
+      print(element.id); // this will get the id of the movie
+      print(element.data());
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    //print(favMovieRef);
+    getData();
     if (widget.movieBucket.isEmpty) {
       return Column(
         children: const [

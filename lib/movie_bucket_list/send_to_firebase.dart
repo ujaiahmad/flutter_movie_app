@@ -7,13 +7,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class SendToFirebase {
   String moveiID;
+  String moveiTitle;
   String moveiImg;
   String moveiGenre;
   String moveiRating;
   String moveiContent;
   String moveiLength;
 
-  SendToFirebase(this.moveiID, this.moveiImg, this.moveiGenre, this.moveiRating,
+  SendToFirebase(this.moveiID,this.moveiTitle, this.moveiImg, this.moveiGenre, this.moveiRating,
       this.moveiContent, this.moveiLength);
 
   CollectionReference favMovieRef = FirebaseFirestore.instance
@@ -23,12 +24,19 @@ class SendToFirebase {
 
   //print(FirebaseAuth.instance.currentUser!.uid);
   addToFirebase() async {
-    await favMovieRef.doc(moveiID).set({
-      "img":moveiImg,
-      "genre":moveiGenre,
-      "rating":moveiRating,
-      "content":moveiContent,
-      "length":moveiLength
+    try {
+      await favMovieRef.doc(moveiID).set({
+      "title":moveiTitle,  
+      "img": moveiImg,
+      "genre": moveiGenre,
+      "rating": moveiRating,
+      "content": moveiContent,
+      "length": moveiLength
     });
+
+    } catch (e) {
+      print(e.toString());
+    }
+    
   }
 }

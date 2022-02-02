@@ -55,9 +55,9 @@ class _MainPageState extends State<MainPage> {
     // print(widget.user!); // this give all , need to send it to other 2
     // print(widget.user!.email); // this give email of thee user
     // print(widget.user!.uid); // this give user id
-    print(currenUser); // this give all , need to send it to other 2
-    print(currenUser!.email); // this give email of thee user
-    print(currenUser!.uid); // this give user id
+    // print(currenUser); // this give all , need to send it to other 2
+    // print(currenUser!.email); // this give email of thee user
+    // print(currenUser!.uid); // this give user id
     return DefaultTabController(
         length: 3,
         child: Scaffold(
