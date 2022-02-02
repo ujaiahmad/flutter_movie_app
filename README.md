@@ -6,7 +6,7 @@
 
 |                  Name                         |    Matric No. | 
 |:----------------------------------------------|:-------------:|
-| USMAN SENG                                    |    1611579    |
+| USMAN SENG                                    |    1611579    |Cancel changes
 | MUHAMMAD ZAFRAN CHAI BIN MUHAMMAD JEFFRY CHAI |    1710003    |
 | AHMAD HUZAIFI BIN AHMAD AZAHRI                |    1918091    |
 | HASSAN FURQAN SAID                            |    1724546    |
@@ -24,3 +24,27 @@
 | Screen        | Functionality | 
 |:--------------|:-------------:|
 |               |               |
+
+
+
+
+
+
+# Instructions
+
+1. Clone the repo
+```
+$ git clone https://github.com/ujaiahmad/flutter_movie_app.git
+```
+2. Change directory
+```
+$ cd flutter_movie_app
+```
+3.Fetch Dependencies from pubspec.yaml
+```
+$ flutter pub get
+```
+4. Run the App
+```
+$ flutter run
+```
