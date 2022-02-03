@@ -6,7 +6,6 @@ import 'package:flutter_movie_app/movie%20by%20popularity/movie_popularity_widge
 import 'package:flutter_movie_app/movie%20by%20year/movie_year_widget.dart';
 import 'package:flutterfire_ui/auth.dart';
 
-import 'movie bucket list/movie_bucket_list.dart';
 import 'movie_bucket_list/movie_bucket_list.dart';
 // import 'package:firebase_auth/firebase_auth.dart'; // new
 // import 'package:firebase_core/firebase_core.dart'; // new
@@ -31,23 +30,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  List movieBucket =
-      []; //store the liked movie name and the boolList(true/false)
-
-  //function add movie title + boollist into the bucket list
-  addMovieIntobucket(movie, boolList) {
-    movieBucket.add([movie, !boolList]);
-
-    //print(movieBucket); //for debugging
-  }
-
-  removeMovieFromBucket(movie) {
-    //get the index of the unliked movie and remove ti
-    movieBucket
-        .removeAt(movieBucket.indexWhere((element) => element[0] == movie));
-    //print(movieBucket); //for debuggin
-  }
-
+  
   User? currenUser = FirebaseAuth.instance.currentUser; //get current user information
 
   @override
@@ -77,10 +60,8 @@ class _MainPageState extends State<MainPage> {
           ),
           body: TabBarView (
             children: [
-              MovieYearCustomCard(
-                  movieBucket, addMovieIntobucket, removeMovieFromBucket),
-              MoviePopularityCustomCard(
-                  movieBucket, addMovieIntobucket, removeMovieFromBucket),
+              MovieYearCustomCard(),
+              MoviePopularityCustomCard(),
               MovieBucketListWidget(),
             ],
           ),

@@ -9,12 +9,6 @@ import 'movie_year.dart';
 import 'movie_year_api.dart';
 
 class MovieYearCustomCard extends StatefulWidget {
-  MovieYearCustomCard(
-      this.movieBucket, this.addMovieIntobucket, this.removeMovieFromBucket);
-
-  List movieBucket;
-  Function addMovieIntobucket;
-  Function removeMovieFromBucket;
 
   @override
   _MovieYearCustomCardState createState() => _MovieYearCustomCardState();
@@ -29,14 +23,12 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
   List<bool> boolList = [];
   List movieDetailsList = [];
   List movieIDlsList = [];
-  List existingMovieIDInFavorite = [];
-  bool hasMovieIDInFavorite = false;
+ 
 
   @override
   void initState() {
     super.initState();
     getMovieYear();
-    getMovieIDsInFavorite();
   }
 
   @override
@@ -60,27 +52,9 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
     });
   }
 
-  getMovieIDsInFavorite() async {
-    CollectionReference favMovieRef = FirebaseFirestore.instance
-        .collection('favorite')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('myList');
-
-    var responseBody = await favMovieRef.get();
-    responseBody.docs.forEach((document) {
-      print(document.id); // this will get the id of the movie
-      setState(() {
-        existingMovieIDInFavorite.add(document.id);
-      });
-
-      // print(document.data());
-    });
-  }
-
   //late final User? user ;
   @override
   Widget build(BuildContext context) {
-    print(existingMovieIDInFavorite);
     return _isLoading
         ? const Center(
             child: CircularProgressIndicator(), //display loading animation
@@ -104,7 +78,7 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
                                 fontSize: 23, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
-                          Text('ID: ' + movieIDlsList[index]), //checking the id
+                          //Text('ID: ' + movieIDlsList[index]), //checking the id
                           Text('Genre: ' +
                               movieDetailsList[index][0].genre.toString()),
                           Text('Rating: ' +

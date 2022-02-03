@@ -78,8 +78,8 @@ class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
                                   fontSize: 23, fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
-                            Text(
-                                'ID:' + snapshot.data.docs[index].data()["id"]),
+                            // Text(
+                            //     'ID:' + snapshot.data.docs[index].data()["id"]),
                             Text('Genre: ' +
                                 snapshot.data.docs[index].data()["genre"]),
                             Text('Rating: ' +
