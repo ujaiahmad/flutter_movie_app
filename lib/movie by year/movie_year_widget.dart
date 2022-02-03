@@ -1,7 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_movie_app/movie_bucket_list/send_to_firebase.dart';
-import 'package:flutterfire_ui/auth.dart';
 import 'package:flutter/material.dart';
 import 'movie_details.dart';
 import 'movie_details_api.dart';
@@ -9,6 +6,8 @@ import 'movie_year.dart';
 import 'movie_year_api.dart';
 
 class MovieYearCustomCard extends StatefulWidget {
+  const MovieYearCustomCard({Key? key}) : super(key: key);
+
 
   @override
   _MovieYearCustomCardState createState() => _MovieYearCustomCardState();
@@ -20,7 +19,6 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
   late List<MovieYear> _movieYear;
   late List<MovieDetails> _movieDetails;
   bool _isLoading = true;
-  List<bool> boolList = [];
   List movieDetailsList = [];
   List movieIDlsList = [];
  
@@ -40,11 +38,9 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
       _movieDetails =
           await MovieDetailsApi.getDetails(//get movie details based on id
               _movieYear[i].movie_id); //pass the id of the 2020 movies
-      //print(_movieDetails);
-      //print(_movieYear[i].movie_id); // movie id
+              
       movieIDlsList.add(_movieYear[i].movie_id);
       movieDetailsList.add(_movieDetails); //add the movie
-      boolList.add(false); //the boolList to false
     }
 
     setState(() {
@@ -52,7 +48,6 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
     });
   }
 
-  //late final User? user ;
   @override
   Widget build(BuildContext context) {
     return _isLoading
@@ -89,9 +84,9 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
                               movieDetailsList[index][0]
                                   .movieLength
                                   .toString()),
-                          SizedBox(height: 20),
+                          const SizedBox(height: 20),
                           ElevatedButton(
-                              child: Text('Add To My List'),
+                              child: const Text('Add To My List'),
                               onPressed: () {
                                 SendToFirebase(
                                         movieIDlsList[index], // movei id

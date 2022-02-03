@@ -6,6 +6,8 @@ import 'movie_popularity.dart';
 import 'movie_popularity_api.dart';
 
 class MoviePopularityCustomCard extends StatefulWidget {
+  const MoviePopularityCustomCard({Key? key}) : super(key: key);
+
   @override
   _MoviePopularityCustomCardState createState() =>
       _MoviePopularityCustomCardState();
@@ -19,7 +21,6 @@ class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard>
   late List<MoviePopularity> _moviePopularity;
   late List<MovieDetails> _movieDetails;
   bool _isLoading = true;
-  List<bool> boolList = [];
   List movieDetailsList = [];
   List movieIDlsList = [];
 
@@ -40,7 +41,6 @@ class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard>
 
       movieIDlsList.add(_moviePopularity[i].movie_id);
       movieDetailsList.add(_movieDetails); // add into list
-      boolList.add(false); //add boolList
     }
 
     setState(() {
