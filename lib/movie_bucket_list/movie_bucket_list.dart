@@ -21,6 +21,18 @@ class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
   //     print(element.data());
   //   });
   // }
+  deleteMovieFromList(movieId) async {
+    CollectionReference favMovieRef = await FirebaseFirestore.instance
+        .collection('favorite')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('myList');
+
+    await favMovieRef
+        .doc(movieId)
+        .delete()
+        .then((value) => print("movie with ID ${movieId} was Deleted"))
+        .catchError((error) => print("Failed to delete movie: $error"));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +49,11 @@ class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
           }
           if (snapshot.hasError) {
             return Text("there was an error");
+          }
+          if (snapshot.data!.docs.length == 0) {
+            return Center(
+              child: Text("You Don't have Any Movie In The List")
+              );
           }
           // if (!snapshot.hasData) {
           //   return Text("You Don't have Any Movie In The List");
@@ -75,7 +92,10 @@ class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
                             //add button
                             ElevatedButton(
                               child: Text('Remove From My List'),
-                              onPressed: () {},
+                              onPressed: () {
+                                deleteMovieFromList(
+                                    snapshot.data.docs[index].data()["id"]);
+                              },
                             )
                           ],
                         ),
@@ -85,7 +105,8 @@ class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
                 );
               },
             );
-          } else {
+          } 
+          else {
             return Text("You Don't have Any Movie In The List");
           }
         });
