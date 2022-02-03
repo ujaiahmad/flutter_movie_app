@@ -33,10 +33,10 @@ This project is intended to be a great resource for movie aficionados as well as
 | Screen        | Functionality | 
 |:--------------|:-------------:|
 |               |               |
-|    <img src="https://user-images.githubusercontent.com/55779908/152313028-695ed94f-f460-4a04-9967-bf1353745159.png" width="100" height="250"> |     |
-|   ![Screenshot_1643879132](https://user-images.githubusercontent.com/55779908/152313114-ffd33db8-02c4-4d0e-80ce-3597fe388d2b.png) |     |
-|   ![Screenshot_1643879205](https://user-images.githubusercontent.com/55779908/152313186-6f0582fd-8865-43b7-84db-6298830d95dd.png) |     |
-|   ![Screenshot_1643879234](https://user-images.githubusercontent.com/55779908/152313287-3a19d6b4-c2f3-4357-a221-03840eea5784.png) |     |
+|    <img src="https://user-images.githubusercontent.com/55779908/152313028-695ed94f-f460-4a04-9967-bf1353745159.png" width="125" height="250">  |     |
+|    <img src="https://user-images.githubusercontent.com/55779908/152313114-ffd33db8-02c4-4d0e-80ce-3597fe388d2b.png" width="125" height="250">  |     |
+|    <img src="https://user-images.githubusercontent.com/55779908/152313186-6f0582fd-8865-43b7-84db-6298830d95dd.png" width="125" height="250">  |     |
+|    <img src="https://user-images.githubusercontent.com/55779908/152313287-3a19d6b4-c2f3-4357-a221-03840eea5784.png" width="125" height="250">  |     |
 
 
 
