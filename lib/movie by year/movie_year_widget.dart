@@ -55,6 +55,7 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
             child: CircularProgressIndicator(), //display loading animation
           )
         : ListView.builder(
+            primary: false,
             itemCount: _movieYear.length,
             itemBuilder: (context, index) {
               return Card(

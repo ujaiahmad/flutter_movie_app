@@ -55,6 +55,7 @@ class _MoviePopularityCustomCardState extends State<MoviePopularityCustomCard>
             child: CircularProgressIndicator(), //display laoding animation
           )
         : ListView.builder(
+            primary: false,
             itemCount: _moviePopularity.length,
             itemBuilder: (context, index) {
               return Card(

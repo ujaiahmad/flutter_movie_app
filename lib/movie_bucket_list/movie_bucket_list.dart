@@ -53,6 +53,7 @@ class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
           }
           if (snapshot.hasData) {
             return ListView.builder(
+              primary: false,
               itemCount: snapshot.data!.docs.length,
               itemBuilder: (BuildContext context, int index) {
                 return Card(
