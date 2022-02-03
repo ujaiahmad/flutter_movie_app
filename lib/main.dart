@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutterfire_ui/auth.dart';
 import 'firebase_options.dart';
-import 'main_page.dart';
 import 'package:provider/provider.dart';
 import 'auth.dart';
 

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_movie_app/movie_bucket_list/send_to_firebase.dart';
 import 'package:flutterfire_ui/auth.dart';
@@ -28,11 +29,14 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
   List<bool> boolList = [];
   List movieDetailsList = [];
   List movieIDlsList = [];
+  List existingMovieIDInFavorite = [];
+  bool hasMovieIDInFavorite = false;
 
   @override
   void initState() {
     super.initState();
     getMovieYear();
+    getMovieIDsInFavorite();
   }
 
   @override
@@ -56,10 +60,27 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
     });
   }
 
+  getMovieIDsInFavorite() async {
+    CollectionReference favMovieRef = FirebaseFirestore.instance
+        .collection('favorite')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('myList');
+
+    var responseBody = await favMovieRef.get();
+    responseBody.docs.forEach((document) {
+      print(document.id); // this will get the id of the movie
+      setState(() {
+        existingMovieIDInFavorite.add(document.id);
+      });
+
+      // print(document.data());
+    });
+  }
+
   //late final User? user ;
   @override
   Widget build(BuildContext context) {
-      // print(user);
+    print(existingMovieIDInFavorite);
     return _isLoading
         ? const Center(
             child: CircularProgressIndicator(), //display loading animation
@@ -94,36 +115,63 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
                               movieDetailsList[index][0]
                                   .movieLength
                                   .toString()),
-                          IconButton(
+                          SizedBox(height: 20),
+                          ElevatedButton(
+                              child: Text('Add To My List'),
                               onPressed: () {
                                 SendToFirebase(
-                                  movieIDlsList[index], // movei id
-                                  movieDetailsList[index][0].movieTitle.toString(),
-                                  movieDetailsList[index][0].img.toString(),
-                                  movieDetailsList[index][0].genre.toString(),
-                                  movieDetailsList[index][0].rating.toString(),
-                                  movieDetailsList[index][0].pgRating.toString(),
-                                  movieDetailsList[index][0].movieLength.toString()
-                                  ).addToFirebase();
-
-                                  // var sendOrDelete= SendToFirebase(
-                                  // movieIDlsList[index],
-                                  // movieDetailsList[index][0].movieTitle.toString(),
-                                  // movieDetailsList[index][0].genre.toString(),
-                                  // movieDetailsList[index][0].rating.toString(),
-                                  // movieDetailsList[index][0].pgRating.toString(),
-                                  // movieDetailsList[index][0].movieLength.toString()
-                                  // );
-                                  // if (movei id inside database){
-                                  //   sendOrDelete.deleteFromFirebase()
-
-                                  // }else {
-                                  //   sendOrDelete.addToFirebase()
-                                  // }
+                                        movieIDlsList[index], // movei id
+                                        movieDetailsList[index][0]
+                                            .movieTitle
+                                            .toString(),
+                                        movieDetailsList[index][0]
+                                            .img
+                                            .toString(),
+                                        movieDetailsList[index][0]
+                                            .genre
+                                            .toString(),
+                                        movieDetailsList[index][0]
+                                            .rating
+                                            .toString(),
+                                        movieDetailsList[index][0]
+                                            .pgRating
+                                            .toString(),
+                                        movieDetailsList[index][0]
+                                            .movieLength
+                                            .toString())
+                                    .addToFirebase();
                               },
-                              icon: Icon(boolList[index] //display fav button
-                                  ? Icons.favorite
-                                  : Icons.favorite_border_outlined)),
+                            ),
+                          // IconButton(
+                          //     onPressed: () {
+                          //       SendToFirebase(
+                          //               movieIDlsList[index], // movei id
+                          //               movieDetailsList[index][0]
+                          //                   .movieTitle
+                          //                   .toString(),
+                          //               movieDetailsList[index][0]
+                          //                   .img
+                          //                   .toString(),
+                          //               movieDetailsList[index][0]
+                          //                   .genre
+                          //                   .toString(),
+                          //               movieDetailsList[index][0]
+                          //                   .rating
+                          //                   .toString(),
+                          //               movieDetailsList[index][0]
+                          //                   .pgRating
+                          //                   .toString(),
+                          //               movieDetailsList[index][0]
+                          //                   .movieLength
+                          //                   .toString())
+                          //           .addToFirebase();
+
+                                
+                          //     },
+                          //     icon: Icon(hasMovieIDInFavorite //display fav button
+                          //         ? Icons.favorite
+                          //         : Icons.favorite_border_outlined)
+                          //         ),
                         ],
                       ),
                     ),

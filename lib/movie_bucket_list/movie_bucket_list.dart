@@ -22,7 +22,7 @@ class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
   //   });
   // }
   deleteMovieFromList(movieId) async {
-    CollectionReference favMovieRef = await FirebaseFirestore.instance
+    CollectionReference favMovieRef = FirebaseFirestore.instance
         .collection('favorite')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('myList');
