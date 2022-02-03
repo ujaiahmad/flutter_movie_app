@@ -14,6 +14,7 @@
 
 
 
+
 **Project Summary:**
 
 This project is intended to be a great resource for movie aficionados as well as a helpful resource for anyone looking for a decent movie to watch. To get a list of movies, the project uses the IMDb API (https://rapidapi.com/SAdrian/api/data-imdb1/). The app is  composed of three screens: 2020 movies, popular movies, and Favorites. When the app first launches, it prompts the user to login their account if they don't have an account they can click on register to create an account. The 2020 movies page uses the IMDb API to pull a list of 2020 movies. The image URL retrieved from the API is used to display each movie as a poster. You can add a movie as a favourite by tapping on the 🖤 icon, and then go to the Favorites tab to see a list of your favourites.
@@ -33,11 +34,11 @@ This project is intended to be a great resource for movie aficionados as well as
 | Screen        | Functionality | 
 |:--------------|:-------------:|
 |               |               |
-|    <img src="https://user-images.githubusercontent.com/55779908/152313028-695ed94f-f460-4a04-9967-bf1353745159.png" width="125" height="250">  |     |
-|    <img src="https://user-images.githubusercontent.com/55779908/152313114-ffd33db8-02c4-4d0e-80ce-3597fe388d2b.png" width="125" height="250">  |     |
+|    <img src="https://user-images.githubusercontent.com/55779908/152355017-26368ef6-75e1-499e-a1be-12fbd2c93605.png" width="125" height="250">  |     |
+|    <img src="https://user-images.githubusercontent.com/55779908/152355175-ee339725-bad4-44b0-ac67-2cacd68093b0.png" width="125" height="250">  |     |
 |    <img src="https://user-images.githubusercontent.com/55779908/152313186-6f0582fd-8865-43b7-84db-6298830d95dd.png" width="125" height="250">  |     |
-|    <img src="https://user-images.githubusercontent.com/55779908/152313287-3a19d6b4-c2f3-4357-a221-03840eea5784.png" width="125" height="250">  |     |
-
+|    <img src="https://user-images.githubusercontent.com/55779908/152355356-31281ead-ad9e-4a29-84fe-31e813e5f08b.png" width="125" height="250">  |     |
+|    <img src="https://user-images.githubusercontent.com/55779908/152355492-23baf645-ee58-4429-bf87-89485c99d374.png" width="125" height="250">  |     |
 
 
 
