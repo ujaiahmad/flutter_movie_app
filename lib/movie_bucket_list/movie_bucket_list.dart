@@ -8,25 +8,26 @@ class MovieBucketListWidget extends StatefulWidget {
 }
 
 class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
-  CollectionReference favMovieRef = FirebaseFirestore.instance
+  Stream<QuerySnapshot> favMovieRef = FirebaseFirestore.instance
       .collection('favorite')
       .doc(FirebaseAuth.instance.currentUser!.uid)
-      .collection('myList');
+      .collection('myList')
+      .snapshots();
 
-  getData() async {
-    var responseBody = await favMovieRef.get();
-    responseBody.docs.forEach((element) {
-      print(element.id); // this will get the id of the movie
-      print(element.data());
-    });
-  }
+  // getData() async {
+  //   var responseBody = await favMovieRef.get();
+  //   responseBody.docs.forEach((element) {
+  //     print(element.id); // this will get the id of the movie
+  //     print(element.data());
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
     //print(favMovieRef);
-    getData();
-    return FutureBuilder(
-        future: favMovieRef.get(),
+    //getData();
+    return StreamBuilder(
+        stream: favMovieRef,
         builder: (context, AsyncSnapshot snapshot) {
           // snapshot will store info that we got from get()
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -60,8 +61,8 @@ class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
                                   fontSize: 23, fontWeight: FontWeight.bold),
                               textAlign: TextAlign.center,
                             ),
-                            Text('ID:' +
-                                snapshot.data.docs[index].data()["id"]),
+                            Text(
+                                'ID:' + snapshot.data.docs[index].data()["id"]),
                             Text('Genre: ' +
                                 snapshot.data.docs[index].data()["genre"]),
                             Text('Rating: ' +
@@ -74,7 +75,7 @@ class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
                             //add button
                             ElevatedButton(
                               child: Text('Remove From My List'),
-                              onPressed: () { },
+                              onPressed: () {},
                             )
                           ],
                         ),
@@ -84,8 +85,7 @@ class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
                 );
               },
             );
-          }
-          else{
+          } else {
             return Text("You Don't have Any Movie In The List");
           }
         });
