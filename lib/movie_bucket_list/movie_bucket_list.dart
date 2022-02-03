@@ -3,6 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MovieBucketListWidget extends StatefulWidget {
+  const MovieBucketListWidget({Key? key}) : super(key: key);
+
   @override
   _MovieBucketListWidgetState createState() => _MovieBucketListWidgetState();
 }
@@ -40,12 +42,12 @@ class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
             );
           }
           if (snapshot.hasError) {
-            return Center(
+            return const Center(
               child: Text("there was an error")
               );
           }
           if (snapshot.data!.docs.length == 0) {
-            return Center(
+            return const Center(
               child: Text("You Don't have Any Movie In The List")
               );
           }
