@@ -142,36 +142,6 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
                                     .addToFirebase();
                               },
                             ),
-                          // IconButton(
-                          //     onPressed: () {
-                          //       SendToFirebase(
-                          //               movieIDlsList[index], // movei id
-                          //               movieDetailsList[index][0]
-                          //                   .movieTitle
-                          //                   .toString(),
-                          //               movieDetailsList[index][0]
-                          //                   .img
-                          //                   .toString(),
-                          //               movieDetailsList[index][0]
-                          //                   .genre
-                          //                   .toString(),
-                          //               movieDetailsList[index][0]
-                          //                   .rating
-                          //                   .toString(),
-                          //               movieDetailsList[index][0]
-                          //                   .pgRating
-                          //                   .toString(),
-                          //               movieDetailsList[index][0]
-                          //                   .movieLength
-                          //                   .toString())
-                          //           .addToFirebase();
-
-                                
-                          //     },
-                          //     icon: Icon(hasMovieIDInFavorite //display fav button
-                          //         ? Icons.favorite
-                          //         : Icons.favorite_border_outlined)
-                          //         ),
                         ],
                       ),
                     ),
