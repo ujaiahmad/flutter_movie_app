@@ -13,6 +13,8 @@
 
 **Project Summary:**
 
+This project is intended to be a great resource for movie aficionados as well as a helpful resource for anyone looking for a decent movie to watch. To get a list of movies, the project uses the IMDB API. The app is  composed of three screens: 2020 movies, popular movies, and Favorites. When the app first launches, it prompts the user to create an account. The 2020 movies page uses the IMDB API to pull a list of 2020 movies. The image URL retrieved from the API is used to display each movie as a poster. You can add a movie as a favourite by tapping on the 🖤 icon, and then go to the Favorites tab to see a list of your favourites.
+
 **Project Objective:**
 
 * Assist users to find interesting movies easier.
@@ -30,7 +32,7 @@
 
 
 
-# Instructions
+**Instructions**
 
 1. Clone the repository 
 ```
