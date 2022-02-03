@@ -34,13 +34,14 @@ This project is intended to be a great resource for movie aficionados as well as
 | Screen        | Functionality | 
 |:--------------|:-------------:|
 |               |               |
-|    <img src="https://user-images.githubusercontent.com/55779908/152355017-26368ef6-75e1-499e-a1be-12fbd2c93605.png" width="125" height="250">  |     |
-|    <img src="https://user-images.githubusercontent.com/55779908/152355175-ee339725-bad4-44b0-ac67-2cacd68093b0.png" width="125" height="250">  |     |
+|    <img src="https://user-images.githubusercontent.com/55779908/152355017-26368ef6-75e1-499e-a1be-12fbd2c93605.png" width="125" height="250">  | **Sign in Screen:** This is the application's landing screen. The user will be able to login in with an existing credential or create a new accounted which is hosted on Firebase. |
+|    <img src="https://user-images.githubusercontent.com/55779908/152355175-ee339725-bad4-44b0-ac67-2cacd68093b0.png" width="125" height="250">  | **Signup Screen:** The user can create a new  account on this screen, and the credentials will be pushed to the Firebase authentication storage. |
 |    <img src="https://user-images.githubusercontent.com/55779908/152355356-31281ead-ad9e-4a29-84fe-31e813e5f08b.png" width="125" height="250">  |     |
-|    <img src="https://user-images.githubusercontent.com/55779908/152355356-31281ead-ad9e-4a29-84fe-31e813e5f08b.png" width="125" height="250">  |     |
+|    <img src="https://user-images.githubusercontent.com/55779908/152361009-58eb988b-237a-40a8-b2fe-8ee9043e3cde.png" width="125" height="250">  |     |
 |    <img src="https://user-images.githubusercontent.com/55779908/152355492-23baf645-ee58-4429-bf87-89485c99d374.png" width="125" height="250">  |     |
 
 
+![Screenshot_1643897877](https://user-images.githubusercontent.com/55779908/152361009-58eb988b-237a-40a8-b2fe-8ee9043e3cde.png)
 
 
 **Instructions**
