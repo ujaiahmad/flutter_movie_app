@@ -26,6 +26,7 @@ class SendToFirebase {
   addToFirebase() async {
     try {
       await favMovieRef.doc(moveiID).set({
+      "id":moveiID,
       "title":moveiTitle,  
       "img": moveiImg,
       "genre": moveiGenre,

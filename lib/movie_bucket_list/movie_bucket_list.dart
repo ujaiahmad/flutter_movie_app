@@ -3,9 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MovieBucketListWidget extends StatefulWidget {
-  List movieBucket;
-  MovieBucketListWidget(this.movieBucket);
-
   @override
   _MovieBucketListWidgetState createState() => _MovieBucketListWidgetState();
 }
@@ -28,49 +25,69 @@ class _MovieBucketListWidgetState extends State<MovieBucketListWidget> {
   Widget build(BuildContext context) {
     //print(favMovieRef);
     getData();
-    if (widget.movieBucket.isEmpty) {
-      return Column(
-        children: const [
-          Text('You have no movie list...'),
-        ],
-      );
-    } else {
-      return Scaffold(
-        body: ListView.builder(
-          itemCount: widget.movieBucket.length,
-          itemBuilder: (context, index) {
-            //isChecked.add(false);
-            return Card(
-              child: Row(
-                children: [
-                  Checkbox(
-                    value: widget.movieBucket[index][1],
-                    onChanged: (bool? value) {
-                      setState(() {
-                        widget.movieBucket[index][1] =
-                            value!; //change tick value to the inverse
-                      });
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Text(widget.movieBucket[index][0].toString(),
-                        style: widget.movieBucket[index]
-                                [1] //change decoration based on boolList
-                            ? const TextStyle(
-                                decoration: TextDecoration.lineThrough,
-                                decorationThickness: 2)
-                            : const TextStyle(decoration: TextDecoration.none)),
-                  ),
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.add)),
-                ],
-              ),
+    return FutureBuilder(
+        future: favMovieRef.get(),
+        builder: (context, AsyncSnapshot snapshot) {
+          // snapshot will store info that we got from get()
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(), //display loading animation
             );
-          },
-        ),
-        floatingActionButton: FloatingActionButton(
-            onPressed: () {}, child: const Icon(Icons.add)),
-      );
-    }
+          }
+          if (snapshot.hasError) {
+            return Text("there was an error");
+          }
+          // if (!snapshot.hasData) {
+          //   return Text("You Don't have Any Movie In The List");
+          // }
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemCount: snapshot.data!.docs.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Card(
+                  child: Row(
+                    children: [
+                      Image(
+                        image: NetworkImage(
+                            snapshot.data.docs[index].data()["img"]),
+                      ),
+                      Expanded(
+                        child: Column(
+                          children: [
+                            Text(
+                              snapshot.data.docs[index].data()["title"],
+                              style: const TextStyle(
+                                  fontSize: 23, fontWeight: FontWeight.bold),
+                              textAlign: TextAlign.center,
+                            ),
+                            Text('ID:' +
+                                snapshot.data.docs[index].data()["id"]),
+                            Text('Genre: ' +
+                                snapshot.data.docs[index].data()["genre"]),
+                            Text('Rating: ' +
+                                snapshot.data.docs[index].data()["rating"]),
+                            Text('Content: ' +
+                                snapshot.data.docs[index].data()["content"]),
+                            Text('Length: ' +
+                                snapshot.data.docs[index].data()["length"]),
+                            SizedBox(height: 20),
+                            //add button
+                            ElevatedButton(
+                              child: Text('Remove From My List'),
+                              onPressed: () { },
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            );
+          }
+          else{
+            return Text("You Don't have Any Movie In The List");
+          }
+        });
   }
 }

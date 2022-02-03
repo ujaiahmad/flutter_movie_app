@@ -81,7 +81,7 @@ class _MainPageState extends State<MainPage> {
                   movieBucket, addMovieIntobucket, removeMovieFromBucket),
               MoviePopularityCustomCard(
                   movieBucket, addMovieIntobucket, removeMovieFromBucket),
-              MovieBucketListWidget(movieBucket)
+              MovieBucketListWidget(),
             ],
           ),
         ));
