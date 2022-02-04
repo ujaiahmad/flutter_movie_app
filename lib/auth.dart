@@ -13,8 +13,8 @@ class Auth extends StatelessWidget {
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           return SignInScreen(providerConfigs: [
-            EmailProviderConfiguration(),
-          ]);
+              EmailProviderConfiguration(),
+            ]);
         }
         return MainPage();
       },

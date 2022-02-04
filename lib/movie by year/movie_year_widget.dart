@@ -1,3 +1,4 @@
+import 'package:flutter_movie_app/movie_bucket_list/send_to_firebase.dart';
 import 'package:flutter/material.dart';
 import 'movie_details.dart';
 import 'movie_details_api.dart';
@@ -5,12 +6,8 @@ import 'movie_year.dart';
 import 'movie_year_api.dart';
 
 class MovieYearCustomCard extends StatefulWidget {
-  MovieYearCustomCard(
-      this.movieBucket, this.addMovieIntobucket, this.removeMovieFromBucket);
+  const MovieYearCustomCard({Key? key}) : super(key: key);
 
-  List movieBucket;
-  Function addMovieIntobucket;
-  Function removeMovieFromBucket;
 
   @override
   _MovieYearCustomCardState createState() => _MovieYearCustomCardState();
@@ -22,8 +19,9 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
   late List<MovieYear> _movieYear;
   late List<MovieDetails> _movieDetails;
   bool _isLoading = true;
-  List<bool> boolList = [];
   List movieDetailsList = [];
+  List movieIDlsList = [];
+ 
 
   @override
   void initState() {
@@ -40,9 +38,9 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
       _movieDetails =
           await MovieDetailsApi.getDetails(//get movie details based on id
               _movieYear[i].movie_id); //pass the id of the 2020 movies
-
+              
+      movieIDlsList.add(_movieYear[i].movie_id);
       movieDetailsList.add(_movieDetails); //add the movie
-      boolList.add(false); //the boolList to false
     }
 
     setState(() {
@@ -57,6 +55,7 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
             child: CircularProgressIndicator(), //display loading animation
           )
         : ListView.builder(
+            primary: false,
             itemCount: _movieYear.length,
             itemBuilder: (context, index) {
               return Card(
@@ -75,6 +74,7 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
                                 fontSize: 23, fontWeight: FontWeight.bold),
                             textAlign: TextAlign.center,
                           ),
+                          //Text('ID: ' + movieIDlsList[index]), //checking the id
                           Text('Genre: ' +
                               movieDetailsList[index][0].genre.toString()),
                           Text('Rating: ' +
@@ -85,29 +85,33 @@ class _MovieYearCustomCardState extends State<MovieYearCustomCard>
                               movieDetailsList[index][0]
                                   .movieLength
                                   .toString()),
-                          IconButton(
+                          const SizedBox(height: 20),
+                          ElevatedButton(
+                              child: const Text('Add To My List'),
                               onPressed: () {
-                                setState(() {
-                                  if (boolList[index] == false) {
-                                    boolList[index] = true;
-                                    widget.addMovieIntobucket(
+                                SendToFirebase(
+                                        movieIDlsList[index], // movei id
                                         movieDetailsList[index][0]
                                             .movieTitle
                                             .toString(),
-                                        boolList[
-                                            index]); //add liked movie into bucket list
-                                  } else {
-                                    boolList[index] = false;
-                                    widget.removeMovieFromBucket(movieDetailsList[
-                                            index][0]
-                                        .movieTitle
-                                        .toString()); //removed like movie from bucket
-                                  }
-                                });
+                                        movieDetailsList[index][0]
+                                            .img
+                                            .toString(),
+                                        movieDetailsList[index][0]
+                                            .genre
+                                            .toString(),
+                                        movieDetailsList[index][0]
+                                            .rating
+                                            .toString(),
+                                        movieDetailsList[index][0]
+                                            .pgRating
+                                            .toString(),
+                                        movieDetailsList[index][0]
+                                            .movieLength
+                                            .toString())
+                                    .addToFirebase();
                               },
-                              icon: Icon(boolList[index] //display fav button
-                                  ? Icons.favorite
-                                  : Icons.favorite_border_outlined)),
+                            ),
                         ],
                       ),
                     ),
